@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-ml
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi-ml
+  template:
+    metadata:
+      labels:
+        app: fastapi-ml
+    spec:
+      imagePullSecrets:
+        - name: jfrog-docker-secret
+      containers:
+        - name: fastapi-ml
+          image: trialok42lr.jfrog.io/ml-docker-local/ml-fastapi:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
